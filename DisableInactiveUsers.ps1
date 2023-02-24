@@ -1,0 +1,1 @@
+get-aduser -SearchBase “OU=Users,DC=DOAMIN,DC=LOCAL” -filter * -Properties lastlogondate | Where-Object {($_.lastlogondate -le $90days -or $_.lastlogondate -notlike “*”) -AND ($_.Enabled -eq $True) -AND ($_.DistinguishedName -notlike "*IT*") } | foreach { Disable-ADAccount -Identity $_.SamAccountName }
