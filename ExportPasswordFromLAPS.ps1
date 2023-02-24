@@ -36,4 +36,6 @@ $jsonObject = @{
 		}
 	)
 	items = $array;
-} | ConvertTo-Json -Depth 3 | Out-File -Encoding UTF8 "C:\vaultwarden.json"
+} | ConvertTo-Json -Depth 3 
+
+$jsonObject | Out-File -Encoding UTF8 "C:\vaultwarden.json"
