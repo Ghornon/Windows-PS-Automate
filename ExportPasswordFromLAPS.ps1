@@ -13,7 +13,9 @@ foreach ($p in $passwords) {
 			reprompt = 0
 			notes = $null
 			favorite = $false
-			collectionIds = $null
+			collectionIds = @(
+				"23605e34-b270-40aa-a9b6-7ddff2bcd261"
+			)
 			name = $p.ComputerName
 			login = @{
 				username = "Administrator"
@@ -27,12 +29,23 @@ foreach ($p in $passwords) {
 
 $today = Get-Date -Format "dd-MM-yyyy"
 
+
+
+
 $jsonObject = @{
 	encrypted = $false;
 	folders = @(
 		@{
 			id = "f1415bf5-d0a4-409b-b498-58dcc61e4fc8"
 			name = "LAPS import (" + $today + ")"
+		}
+	)
+	collections = @(
+		@{
+			id = "23605e34-b270-40aa-a9b6-7ddff2bcd261"
+			organizationId = $null
+			name = "LAPS import (" + $today + ")"
+			externalId = $null
 		}
 	)
 	items = $array;
