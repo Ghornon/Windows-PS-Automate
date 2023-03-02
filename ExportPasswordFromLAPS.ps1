@@ -2,19 +2,22 @@ Import-Module AdmPwd.PS
 
 $passwords =  Get-AdmPwdPassword -ComputerName * | Select-Object -Property ComputerName,PasswordLastSetTime,Password
 
+$newFolderId = New-Guid
+$newCollectionId = New-Guid
+
 $array = @();
 
 foreach ($p in $passwords) {
 	if ($p.Password) {
 		$item = @{
       		organizationId = $null
-      		folderId = "f1415bf5-d0a4-409b-b498-58dcc61e4fc8"
+      		folderId = $newFolderId
 			type = 1
 			reprompt = 0
 			notes = $null
 			favorite = $false
 			collectionIds = @(
-				"23605e34-b270-40aa-a9b6-7ddff2bcd261"
+				$newCollectionId
 			)
 			name = $p.ComputerName
 			login = @{
@@ -29,20 +32,17 @@ foreach ($p in $passwords) {
 
 $today = Get-Date -Format "dd-MM-yyyy"
 
-
-
-
 $jsonObject = @{
 	encrypted = $false;
 	folders = @(
 		@{
-			id = "f1415bf5-d0a4-409b-b498-58dcc61e4fc8"
+			id = $newFolderId
 			name = "LAPS import (" + $today + ")"
 		}
 	)
 	collections = @(
 		@{
-			id = "23605e34-b270-40aa-a9b6-7ddff2bcd261"
+			id = $newCollectionId
 			organizationId = $null
 			name = "LAPS import (" + $today + ")"
 			externalId = $null
